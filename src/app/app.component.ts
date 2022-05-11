@@ -8,7 +8,7 @@ import {Web3Service} from "./services/contract/web3.service";
 })
 export class AppComponent {
   authenticated: boolean = false;
-  data: string[] | undefined;
+  data: string[] = [];
 
 
   constructor(
@@ -20,6 +20,13 @@ export class AppComponent {
     this.web3.connectAccount().then(response => {
       console.log(response);
       this.data = response
+      this.web3.accountInfo(response).then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
+      })
+    }).catch(err => {
+      console.log(err)
     })
   }
 

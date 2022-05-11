@@ -5,12 +5,7 @@ import Web3 from 'web3';
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { provider } from 'web3-core';
-
-
-
-@Injectable({
-  providedIn: 'root'
-})
+import CoinbaseWalletSDK from '@coinbase/wallet-sdk';
 
 @Injectable({
   providedIn: 'root'
@@ -20,11 +15,18 @@ export class Web3Service {
   web3Modal;
   web3js:  any;
   provider: provider | undefined;
-  accounts: string[] | undefined;
+  accounts: string[] = [];
   balance: string | undefined;
 
   constructor(@Inject(WEB3) private web3: Web3) {
     const providerOptions = {
+      walletlink: {
+        package: CoinbaseWalletSDK, // Required
+        options: {
+          appName: "Web 3 Modal Demo", // Required
+          infuraId: 0x0122D973d612B48658508bA3091C2565d4f6F5B5 // Required unless you provide a JSON RPC url; see `rpc` below
+        }
+      },
       walletconnect: {
         package: WalletConnectProvider, // required
         options: {
