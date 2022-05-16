@@ -1,0 +1,16 @@
+
+<div class="row">
+    <ng-container *ngFor="let item of NFTsList; index as i">
+        <div class="col-sm-3" *ngIf="item.cached_file_url">
+          <div class="card m-3">
+            <img [src]="item.cached_file_url" class="card-img-top" alt="..." style="height: 250px;">
+            <div class="card-body">
+              <h5 class="card-title"><strong>Store Name: </strong> {{item.name}}</h5>
+              <p class="card-text"><strong>Store Description: </strong>{{item.description}}</p>
+              <a href="javascript:void(0);" class="btn btn-primary">Go To Store</a>
+            </div>
+          </div>
+        </div>
+    </ng-container>
+    <button type="button" class="btn btn-outline-primary btn-sm" (click)="logout()">Disconnect</button>
+  </div>
